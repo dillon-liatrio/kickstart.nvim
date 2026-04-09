@@ -206,6 +206,9 @@ vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', 'n', 'nzz')
 vim.keymap.set('n', 'N', 'Nzz')
 
+-- Paste without clobbering the yank register
+vim.keymap.set('x', 'p', '"_dP', { desc = 'Paste without overwriting register' })
+
 -- Buffer navigation
 vim.keymap.set('n', '<Tab>', '<cmd>bnext<CR>', { desc = 'Next buffer' })
 vim.keymap.set('n', '<S-Tab>', '<cmd>bprev<CR>', { desc = 'Prev buffer' })
@@ -575,6 +578,7 @@ require('lazy').setup({
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
           map('gra', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
+          map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
@@ -874,7 +878,6 @@ require('lazy').setup({
       -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
-      require('mini.surround').setup()
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
